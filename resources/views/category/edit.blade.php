@@ -11,7 +11,7 @@
  <!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    @include('partials.content_header', ['name' => 'Categpry', 'key' => 'Add']);
+    @include('partials.content_header', ['name' => 'Categpry', 'key' => 'Edit']);
     <!-- /.content-header -->
 
     <!-- Main content -->
@@ -25,7 +25,8 @@
                         <label >Ten danh muc</label>
                         <input type="text" 
                                class="form-control"
-                               name="name" 
+                               name="name"
+                               value="{{  $category->name }}" 
                                placeholder="Nhap ten danh muc"
                         >
                     </div>

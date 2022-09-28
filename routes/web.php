@@ -22,8 +22,30 @@ Route::get('/home', function () {
 });
 
 Route::prefix('catogories')->group(function () {
+    //route den trang index cua category
+    Route::get('/', [
+        'as' => 'catogories.index',
+        'uses' => 'App\Http\Controllers\CategoryController@index'
+    ]);
+
+    //route den trang create danh muc
     Route::get('/create', [
         'as' => 'catogories.create',
         'uses' => 'App\Http\Controllers\CategoryController@create'
+    ]);
+
+    Route::post('/store', [
+        'as' => 'catogories.store',
+        'uses' => 'App\Http\Controllers\CategoryController@store'
+    ]);
+
+    Route::get('/edit/{id}', [
+        'as' => 'catogories.edit',
+        'uses' => 'App\Http\Controllers\CategoryController@edit'
+    ]);
+
+    Route::get('/delete/{id}', [
+        'as' => 'catogories.delete',
+        'uses' => 'App\Http\Controllers\CategoryController@delete'
     ]);
 });
