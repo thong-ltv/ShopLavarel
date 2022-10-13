@@ -6,10 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model
+class Menu extends Model
 {
     use HasFactory;
     protected $fillable =['name', 'parent_id', 'slug'];  //de chua cac ban duoc phep thao tac voi du lieu
     use SoftDeletes;
-    
 }

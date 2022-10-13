@@ -27,7 +27,7 @@ class Recusive {
                 }
                 // echo "<option>".$text.$value['name']."</option>";// trong thuc te khong nen dung echo
                 
-                $this->recusive($value['id'], $text. '-');
+                $this->recusive($parent_id, $value['id'], $text. '-');
             }
         } 
         

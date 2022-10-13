@@ -50,7 +50,7 @@ class CategoryController extends Controller
         // }
         $htmlOption = $this->getCategory($parent_id = '');
 
-        return view('category.add', compact('htmlOption'));  // tra ve view add va truyen theo chuoi htmlOption
+        return view('admin.category.add', compact('htmlOption'));  // tra ve view add va truyen theo chuoi htmlOption
 
 
     }
@@ -76,7 +76,7 @@ class CategoryController extends Controller
     {
         // dd('created'); hien chu len man hinh
         $categories = $this->category->latest()->paginate(3);  //tro den model category (category), lay nhung san pham moi dua vao (latest), moi trang 5 sp (paginate)
-        return view('category.index', compact('categories')); //return ve mot view   compact laf truyen bien di
+        return view('admin.category.index', compact('categories')); //return ve mot view   compact laf truyen bien di
     }
 
     // insert danh muc vao data
@@ -104,11 +104,24 @@ class CategoryController extends Controller
         $category = $this->category->find($id);  //tra ve mang object cac doi tuong
         $parent_id = $category->parent_id;
         $htmlOption = $this->getCategory($parent_id);
-        return view('category.edit', compact('htmlOption', 'category'));
+        return view('admin.category.edit', compact('htmlOption', 'category'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->category->find($id)->update([  //ham create de insert du lieu
+            'name' => $request->name,
+            'parent_id' => $request->parent_id,
+            'slug' => Str::slug($request->name, '-') //slug dung de chuyen string thanh slug
+        ]);
+
+        return redirect()->route('catogories.index');
     }
 
     public function delete($id)
     {
+        $this->category->find($id)->delete();
 
+        return redirect()->route('catogories.index');
     }
 }

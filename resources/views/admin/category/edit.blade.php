@@ -19,7 +19,7 @@
       <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                <form action="{{  route('catogories.store') }}" method="POST">
+                <form action="{{  route('catogories.update', ['id' => $category->id]) }}" method="POST">
                     @csrf <!--   muon submit form can them @csrf -->
                     <div class="form-group">
                         <label >Ten danh muc</label>
