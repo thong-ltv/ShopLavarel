@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Components\Recusive;
+use App\Http\Requests\ProductAddRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
@@ -52,7 +53,7 @@ class AdminProductController extends Controller
         return view('admin.product.add', compact('htmlOption'));
     }
 
-    public function store(Request $request) {
+    public function store(ProductAddRequest $request) {
 
         try {
             DB::beginTransaction();
@@ -66,6 +67,7 @@ class AdminProductController extends Controller
             ];
     
             $dataUplaodFeatureImage = $this->storageTraitUpload($request, 'feature_image_path', 'product');
+            
             if(!empty($dataUplaodFeatureImage))
             {
                 $dataProductCreate['feature_image_name'] = $dataUplaodFeatureImage['file_name'];
@@ -201,19 +203,21 @@ class AdminProductController extends Controller
 
     public function delete($id) 
     {
-        dd($id);
-        // try {
-        //     $this->product->find($id)->delete();
-        //     return response()->json([
-        //         'code' => 200,
-        //         'message' => 'success'
-        //     ], status: 200);
-        // } catch (\Throwable $th) {
-        //     Log::error("Message: ".$th->getMessage()."---Line".$th->getLine());
-        //     return response()->json([
-        //         'code' => 500,
-        //         'message' => 'fail'
-        //     ], status: 500);
-        // }
+        
+        try {
+            $this->product->find($id)->delete();
+            $this->productImage->where('product_id', $id)->delete();
+            // return response()->json([
+            //     'code' => 200,
+            //     'message' => 'success'
+            // ], status: 200);
+        } catch (\Throwable $th) {
+            Log::error("Message: ".$th->getMessage()."---Line".$th->getLine());
+            return response()->json([
+                'code' => 500,
+                'message' => 'fail'
+            ], status: 500);
+        }
+        return redirect()->route('products.index');
     }
 }

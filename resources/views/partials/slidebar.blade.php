@@ -64,6 +64,42 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a href="{{  route('sliders.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Slider
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{  route('settings.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Settings
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{  route('users.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Danh sach nhan vien
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{  route('roles.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Danh sach vai trò (Roles)
+              </p>
+            </a>
+          </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

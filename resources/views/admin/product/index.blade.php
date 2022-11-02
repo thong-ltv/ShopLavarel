@@ -58,9 +58,10 @@
                     <td>{{  optional($productItem->category)->name }}</td>  
                     <td>
                           <a href="{{  route('products.edit', ['id' => $productItem->id]) }}" class="btn btn-default">Edit</a>
-                          <a href="" 
+                          <a href="{{  route('products.delete', ['id' => $productItem->id]) }}"
+                            OnClick="return confirm('Ban co that su muon xoa?');"
                             data-url = "{{  route('products.delete', ['id' => $productItem->id]) }}"
-                            class="btn btn-danger action_delete">Delete</a>
+                            class="btn btn-danger">Delete</a>
                     </td>
 
                   @endforeach

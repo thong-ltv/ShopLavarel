@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
     public function loginAdmin()
     {
-        // dd(bcrypt(123));//ma hoa pass
+        //dd(bcrypt('thong'));//ma hoa pass
+        //dd(md5(123));
         if(auth()->check())
         {
             return redirect()->to('home');
@@ -19,7 +21,8 @@ class AdminController extends Controller
     public function postLoginAdmin(Request $request)
     {
         //kiem tra ten dang nhap va password
-        $remember = $request->has('remember_me') ? true : false;
+        $remember = $request->has('remember-me') ? true : false;
+
         if(auth()->attempt([
             'email'=>$request->email,
             'password'=>$request->password

@@ -18,6 +18,17 @@
     <!-- Content Header (Page header) -->
     @include('partials.content_header', ['name' => 'Product', 'key' => 'Add']);
     <!-- /.content-header -->
+    <!-- <div class="col-md-12">
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+    </div> -->
 
     <!-- Main content -->
     <form action="{{  route('products.store') }}" method="POST" enctype="multipart/form-data">
@@ -30,18 +41,26 @@
                     <div class="form-group">
                         <label >Ten sản phẩm </label>
                         <input type="text" 
-                               class="form-control"
+                               class="form-control @error('name') is-invalid @enderror"
                                name="name" 
                                placeholder="Nhập tên sản phẩm"
+                               value="{{  old('name') }}"
                         >
+                        @error('name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label >Giá sản phẩm </label>
                         <input type="text" 
-                               class="form-control"
+                               class="form-control @error('price') is-invalid @enderror"
                                name="price" 
                                placeholder="Nhập giá sản phẩm"
+                               value="{{  old('price') }}"
                         >
+                        @error('price')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label >Ảnh đại diện sản phẩm </label>
@@ -61,11 +80,14 @@
 
                     <div class="form-group">
                         <label >Chon danh muc</label>
-                        <select class="form-control danhmuc_selected2" name="category_id">
+                        <select class="form-control danhmuc_selected2 @error('category_id') is-invalid @enderror" name="category_id">
                         <option value="">Chon danh muc</option>
                         <!-- dua 2 dau !! truoc va sau chuoi string de no hieu -->
                         {!!  $htmlOption !!} 
                         </select>
+                        @error('category_id')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
@@ -77,7 +99,10 @@
             <div class="col-md-12">
                         <div class="form-group">
                             <label>Nhập nội dung</label>
-                            <textarea class="form-control tinymce_editor_init" name="content" rows="10"></textarea>
+                            <textarea value="" class="form-control tinymce_editor_init @error('content') is-invalid @enderror" name="content" rows="10">{{  old('content') }}</textarea>
+                            @error('content')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         </div>
                     </div>
 
