@@ -28,6 +28,11 @@ Route::prefix('admin')->group(function () {
             'as' => 'catogories.index',
             'uses' => 'App\Http\Controllers\CategoryController@index'
         ]);
+
+        Route::get('/indexAPI', [
+            
+            'uses' => 'App\Http\Controllers\CategoryController@indexAPI'
+        ]);
     
         //route den trang create danh muc
         Route::get('/create', [
@@ -221,6 +226,11 @@ Route::prefix('roles')->group(function () {
     Route::get('/', [
         'as' => 'roles.index',
         'uses' => 'App\Http\Controllers\AdminRoleController@index'
+    ]);
+
+    Route::get('/create', [
+        'as' => 'roles.create',
+        'uses' => 'App\Http\Controllers\AdminRoleController@create'
     ]);
 });
 

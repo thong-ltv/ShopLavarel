@@ -79,6 +79,14 @@ class CategoryController extends Controller
         return view('admin.category.index', compact('categories')); //return ve mot view   compact laf truyen bien di
     }
 
+    public function indexAPI()
+    {
+        $categories = $this->category->get();
+        return response()->json([
+            "data" => $categories
+        ]);
+    }
+
     // insert danh muc vao data
     public function store(Request $request)
     {
