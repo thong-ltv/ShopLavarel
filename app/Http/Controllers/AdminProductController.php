@@ -78,6 +78,7 @@ class AdminProductController extends Controller
     
             //insert data to product_images
             if($request->hasFile('image_path'))
+            
             {
                 foreach($request->image_path as $fileItem)
                 {
