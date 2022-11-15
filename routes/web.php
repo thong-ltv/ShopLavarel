@@ -26,7 +26,8 @@ Route::prefix('admin')->group(function () {
         //route den trang index cua category
         Route::get('/', [
             'as' => 'catogories.index',
-            'uses' => 'App\Http\Controllers\CategoryController@index'
+            'uses' => 'App\Http\Controllers\CategoryController@index', 
+            'middleware' => 'can:category-list'
         ]);
 
         Route::get('/indexAPI', [
@@ -231,6 +232,34 @@ Route::prefix('roles')->group(function () {
     Route::get('/create', [
         'as' => 'roles.create',
         'uses' => 'App\Http\Controllers\AdminRoleController@create'
+    ]);
+
+    Route::post('/store', [
+        'as' => 'roles.store',
+        'uses' => 'App\Http\Controllers\AdminRoleController@store'
+    ]); 
+
+    Route::get('/edit/{id}', [
+        'as' => 'roles.edit',
+        'uses' => 'App\Http\Controllers\AdminRoleController@edit'
+    ]);
+
+    Route::post('/update/{id}', [
+        'as' => 'roles.update',
+        'uses' => 'App\Http\Controllers\AdminRoleController@update'
+    ]);
+
+});
+
+Route::prefix('permissions')->group(function () {
+    Route::get('/create', [
+        'as' => 'permissions.create',
+        'uses' => 'App\Http\Controllers\AdminPermissionController@createPermission'
+    ]);
+
+    Route::post('/store', [
+        'as' => 'permissions.store',
+        'uses' => 'App\Http\Controllers\AdminPermissionController@store'
     ]);
 });
 

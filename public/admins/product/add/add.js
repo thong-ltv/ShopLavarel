@@ -7,6 +7,14 @@ $(function() {
         placeholder: "Chon danh muc",
         allowClear: true
     });
+    $(".chooseImage").change(function () {
+      if($(this).val() == 1)
+      {
+        $("#local").innerHTML = 1;
+      }else {
+        $("#local").append($(this).val());
+      }
+    });
 
     // let editor_config = {
     //     path_absolute : "/",

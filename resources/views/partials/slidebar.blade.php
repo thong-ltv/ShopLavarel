@@ -100,6 +100,14 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a href="{{  route('permissions.create') }}" class="nav-link">
+              <p>
+                Tao Dữ liệu Bảng Permission 
+              </p>
+            </a>
+          </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

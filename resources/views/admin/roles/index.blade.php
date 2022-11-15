@@ -44,7 +44,7 @@
                         <td>{{ $role->name }}</td>
                         <td>{{ $role->display_name}}</td>
                         <td>
-                            <a href="#" class="btn btn-default">Edit</a>
+                            <a href="{{ route('roles.edit', ['id'=>$role->id]) }}" class="btn btn-default">Edit</a>
                             <a href="#"
                                OnClick="return confirm('Ban co that su muon xoa?');"
                                class="btn btn-danger">Delete</a>

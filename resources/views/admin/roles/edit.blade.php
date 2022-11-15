@@ -2,7 +2,7 @@
 
 @section('title')
 
-    <title>Roles Add</title>
+    <title>Roles Edit</title>
 
 @endsection
 
@@ -21,14 +21,14 @@
  <!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    @include('partials.content_header', ['name' => 'Role', 'key' => 'Add']);
+    @include('partials.content_header', ['name' => 'Role', 'key' => 'Edit']);
     <!-- /.content-header -->
 
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
         <div class="row">
-            <form action="{{  route('roles.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('roles.update', ['id' => $role->id ])  }}" method="POST" enctype="multipart/form-data">
                 <div class="col-md-12">
                     
                     @csrf <!--   muon submit form can them @csrf -->
@@ -38,7 +38,7 @@
                             class="form-control"
                             name="name" 
                             placeholder="Nhap ten Role"
-                            value="{{  old('name') }}"
+                            value="{{  $role->name }}"
                         >
                         
                     </div>
@@ -47,7 +47,7 @@
                         <label >Mo ta Role</label>
                         <textarea 
                             class="form-control"
-                            name="display_name" rows="4">{{  old('description') }}</textarea>
+                            name="display_name" rows="4">{{  $role->display_name }}</textarea>
                         
                     </div>
 
@@ -77,6 +77,7 @@
                                     <h5 class="card-title">
                                         <label>
                                             <input type="checkbox" name="permission_id[]"
+                                            {{  $permissionChecked->contains('id', $permissionsChildrenItem->id) ? "checked" : "" }}
                                             class="checkbox_childrent"
                                             value="{{ $permissionsChildrenItem->id }}">
                                         </label>
