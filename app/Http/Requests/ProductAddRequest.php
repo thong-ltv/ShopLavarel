@@ -26,6 +26,8 @@ class ProductAddRequest extends FormRequest
         return [
             'name' => 'bail|required|unique:products|max:255|min:10',
             'price' => 'required',
+            'color' => 'required',
+            'sizes' => 'required',
             'category_id' => 'required',
             'content' => 'required',
             
@@ -40,6 +42,8 @@ class ProductAddRequest extends FormRequest
             'name.max' => 'Tên không được phép quá 255 kí tự',
             'name.min' => 'Tên không được phép ít hơn 10 kí tự',
             'price.required' => 'Giá không được phép để trống',
+            'color.required' => 'Màu sắc không được phép để trống',
+            'sizes.required' => 'Kích thước không được phép để trống',
             'category_id.required' => 'Danh mục không được phép để trống',
             'content.required' => 'Nội dung không được phép để trống',
             

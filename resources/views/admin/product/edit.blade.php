@@ -29,7 +29,7 @@
                 
                     @csrf <!--   muon submit form can them @csrf -->
                     <div class="form-group">
-                        <label >Ten sản phẩm </label>
+                        <label >Tên sản phẩm </label>
                         <input type="text" 
                                class="form-control"
                                name="name" 
@@ -45,6 +45,26 @@
                                placeholder="Nhập giá sản phẩm"
                                value="{{  $product->price }}"
                         >
+                    </div>
+                    <div class="form-group">
+                        <label >Màu sắc sản phẩm </label>
+                        <input type="text" 
+                               class="form-control"
+                               name="color" 
+                               placeholder="Nhập màu sắc sản phẩm"
+                               value="{{  $product->color }}"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label >Chon kích thước</label>
+                        <select class="form-control" name="sizes">
+                        <option value="{{  $product->size }}">{{  $product->size }}</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label >Ảnh đại diện sản phẩm </label>

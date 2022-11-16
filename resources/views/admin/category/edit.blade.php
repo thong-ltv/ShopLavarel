@@ -22,16 +22,16 @@
                 <form action="{{  route('catogories.update', ['id' => $category->id]) }}" method="POST">
                     @csrf <!--   muon submit form can them @csrf -->
                     <div class="form-group">
-                        <label >Ten danh muc</label>
+                        <label >Tên danh mục</label>
                         <input type="text" 
                                class="form-control"
                                name="name"
                                value="{{  $category->name }}" 
-                               placeholder="Nhap ten danh muc"
+                               placeholder="Nhập tên danh mục"
                         >
                     </div>
                     <div class="form-group">
-                        <label >Chon danh muc cha</label>
+                        <label >Chọn danh mục cha</label>
                         <select class="form-control" name="parent_id">
                         <option value="0">Chon danh muc cha</option>
                         <!-- dua 2 dau !! truoc va sau chuoi string de no hieu -->

@@ -60,6 +60,8 @@ class AdminProductController extends Controller
             $dataProductCreate = [
                 'name' => $request->name,
                 'price' => $request->price,
+                'color' => $request->color,
+                'size' => $request->sizes,
                 'content' => $request->content,
                 'user_id' => Auth::id(),
                 'category_id' => $request->category_id,
@@ -139,6 +141,8 @@ class AdminProductController extends Controller
             $dataProductUpdate = [
                 'name' => $request->name,
                 'price' => $request->price,
+                'color' => $request->color,
+                'size' => $request->sizes,
                 'content' => $request->content,
                 'user_id' => Auth::id(),
                 'category_id' => $request->category_id,

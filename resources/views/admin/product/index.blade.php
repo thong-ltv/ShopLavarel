@@ -36,10 +36,12 @@
             <table class="table">
                 <thead>
                     <tr>
-                    <th scope="col">STT</th>
+                    <th scope="col">Id</th>
                     <th scope="col">Tên sản phẩm</th>
                     <th scope="col">Giá</th>
                     <th scope="col">Hình ảnh</th>
+                    <th scope="col">Màu sắc</th>
+                    <th scope="col">Kích thước</th>
                     <th scope="col">Danh mục</th>
                     <th scope="col">Action</th>
                     </tr>
@@ -55,6 +57,8 @@
                     <td>
                       <img class="productImage_150_100" src="{{  $productItem->feature_image_path }}" alt="">
                     </td>
+                    <td>{{  $productItem->color }}</td>
+                    <td>{{  $productItem->size }}</td>
                     <td>{{  optional($productItem->category)->name }}</td>  
                     <td>
                           <a href="{{  route('products.edit', ['id' => $productItem->id]) }}" class="btn btn-default">Edit</a>

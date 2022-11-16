@@ -20,7 +20,7 @@
         <div class="row">
 
           <div class="col-lg-12">
-            Trang chu
+              <h1>Chào mừng bạn đến với trang quản lý của FashionWeb</h1>
           </div>
         </div>
         <!-- /.row -->

@@ -263,4 +263,24 @@ Route::prefix('permissions')->group(function () {
     ]);
 });
 
+//Route API
+Route::prefix('api')->group(function () {
+    Route::prefix('product')->group(function () {
+        Route::get('/list', [
+            'as' => 'api.product.list',
+            'uses' => 'App\Http\Controllers\ApiProductController@list'
+        ]);
+
+        Route::get('/list/{id}', [
+            'as' => 'api.product.detailProduct',
+            'uses' => 'App\Http\Controllers\ApiProductController@detailProduct'
+        ]);
+
+        Route::get('/searchProduct/{data}', [
+            'as' => 'api.product.searchProduct',
+            'uses' => 'App\Http\Controllers\ApiProductController@searchProduct'
+        ]);
+    });
+});
+
 

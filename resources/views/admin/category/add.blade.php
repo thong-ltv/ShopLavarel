@@ -22,17 +22,17 @@
                 <form action="{{  route('catogories.store') }}" method="POST">
                     @csrf <!--   muon submit form can them @csrf -->
                     <div class="form-group">
-                        <label >Ten danh muc</label>
+                        <label >Tên danh muc</label>
                         <input type="text" 
                                class="form-control"
                                name="name" 
-                               placeholder="Nhap ten danh muc"
+                               placeholder="Nhập tên danh muc"
                         >
                     </div>
                     <div class="form-group">
-                        <label >Chon danh muc cha</label>
+                        <label >Chọn danh mục cha</label>
                         <select class="form-control" name="parent_id">
-                        <option value="0">Chon danh muc cha</option>
+                        <option value="0">Chọn danh mục cha</option>
                         <!-- dua 2 dau !! truoc va sau chuoi string de no hieu -->
                         {!!  $htmlOption !!} 
                         </select>

@@ -39,7 +39,7 @@
                 
                     @csrf <!--   muon submit form can them @csrf -->
                     <div class="form-group">
-                        <label >Ten sản phẩm </label>
+                        <label >Tên sản phẩm </label>
                         <input type="text" 
                                class="form-control @error('name') is-invalid @enderror"
                                name="name" 
@@ -59,6 +59,32 @@
                                value="{{  old('price') }}"
                         >
                         @error('price')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label >Màu sắc sản phẩm </label>
+                        <input type="text" 
+                               class="form-control @error('color') is-invalid @enderror"
+                               name="color" 
+                               placeholder="Nhập tên sản phẩm"
+                               value="{{  old('color') }}"
+                        >
+                        @error('color')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label >Chọn kích thước</label>
+                        <select class="form-control @error('sizes') is-invalid @enderror" name="sizes">
+                        <option value="">Chon kích thước</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                        </select>
+                        @error('sizes')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>

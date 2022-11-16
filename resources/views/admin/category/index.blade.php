@@ -26,7 +26,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">Id</th>
                     <th scope="col">Tên danh mục</th>
                     <th scope="col">Action</th>
                     </tr>
