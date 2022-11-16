@@ -9,7 +9,7 @@ class AdminController extends Controller
 {
     public function loginAdmin()
     {
-        dd(bcrypt('thong'));//ma hoa pass
+        //dd(bcrypt('thong'));//ma hoa pass
         //dd(md5(123));
         if(auth()->check())
         {
