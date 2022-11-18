@@ -48,23 +48,38 @@
                     </div>
                     <div class="form-group">
                         <label >Màu sắc sản phẩm </label>
-                        <input type="text" 
-                               class="form-control"
-                               name="color" 
-                               placeholder="Nhập màu sắc sản phẩm"
-                               value="{{  $product->color }}"
-                        >
+                        @foreach($colors as $color)
+                            <div class="form-check">
+                            <input class="form-check-input @error('product_colors') is-invalid @enderror" type="checkbox"
+                                    {{  $colorsChecked->contains('id', $color->id) ? "checked" : "" }}
+                                   name="product_colors[]" id="" value="{{ $color->id }}" >
+                            <label class="form-check-label" for="">
+                                {{ $color->name }}
+                            </label>
+                            </div>
+                        @endforeach
+
+                        @error('product_colors')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+    
                     </div>
                     <div class="form-group">
-                        <label >Chon kích thước</label>
-                        <select class="form-control" name="sizes">
-                        <option value="{{  $product->size }}">{{  $product->size }}</option>
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                        <option value="XL">XL</option>
-                        <option value="XXL">XXL</option>
-                        </select>
+                        <label >Chọn kích thước</label>
+                        @foreach($sizes as $size)
+                        <div class="form-check">
+                            <input class="form-check-input @error('product_sizes') is-invalid @enderror" type="checkbox"
+                                  {{  $sizesChecked->contains('id', $size->id) ? "checked" : "" }}
+                                   name="product_sizes[]" id="" value="{{ $size->id }}" >
+                            <label class="form-check-label" for="exampleRadios1">
+                                {{ $size->name }}
+                            </label>
+                        </div>
+                         @endforeach  
+
+                         @error('product_sizes')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label >Ảnh đại diện sản phẩm </label>
@@ -138,7 +153,7 @@
 
 @section('js')
     <script src="{{  asset('vendors/select2/select2.min.js') }}"></script>
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/muq3ewk9282l1n7wrp7xu3wmreb9h9xyekl5ep63f1m7sgou/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="{{  asset('admins/product/add/add.js') }}"></script>
 @endsection
 

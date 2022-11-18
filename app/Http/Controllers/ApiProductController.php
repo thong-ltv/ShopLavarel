@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ApiProductController extends Controller
 {
     private $product;
-    public function __construct(Product $product)
+    private $category;
+    public function __construct(Product $product, Category $category)
     {
         $this->product = $product;
+        $this->category = $category;
     }
 
     public function list()
@@ -22,7 +25,14 @@ class ApiProductController extends Controller
     public function detailProduct($id)
     {
         $detailProduct = $this->product->find($id);
-        return response()->json($detailProduct);
+        return response()->json([
+            "data" => $detailProduct,
+            "color" => [
+                "yellow",
+                "red",
+                "blue"
+            ]
+        ]);
     }
 
     public function searchProduct($data)

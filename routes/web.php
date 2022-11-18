@@ -27,7 +27,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/', [
             'as' => 'catogories.index',
             'uses' => 'App\Http\Controllers\CategoryController@index', 
-            'middleware' => 'can:category-list'
+            // 'middleware' => 'can:category-list'
         ]);
 
         Route::get('/indexAPI', [
@@ -105,7 +105,7 @@ Route::prefix('admin')->group(function () {
             'uses' => 'App\Http\Controllers\AdminProductController@create'
         ]);
 
-        Route::post('/store', [
+        Route::post('/post', [
             'as' => 'products.store',
             'uses' => 'App\Http\Controllers\AdminProductController@store'
         ]);
@@ -263,7 +263,7 @@ Route::prefix('permissions')->group(function () {
     ]);
 });
 
-//Route API
+// Route API
 Route::prefix('api')->group(function () {
     Route::prefix('product')->group(function () {
         Route::get('/list', [
@@ -282,5 +282,6 @@ Route::prefix('api')->group(function () {
         ]);
     });
 });
+
 
 

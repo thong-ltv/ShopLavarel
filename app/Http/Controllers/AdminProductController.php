@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Components\Recusive;
 use App\Http\Requests\ProductAddRequest;
+use App\Http\Requests\ProductUpdateRequest;
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductTag;
+use App\Models\Size;
 use App\Models\Tag;
 use App\Traits\StorageImageTrait;
 use Illuminate\Support\Facades\Auth;
@@ -23,14 +26,18 @@ class AdminProductController extends Controller
     private $productImage;
     private $tag;
     private $productTag;
+    private $color;
+    private $size;
     public function __construct(Category $category, Product $product, ProductImage $productImage,
-                                Tag $tag, ProductTag $productTag)
+                                Tag $tag, ProductTag $productTag, Color $color, Size $size)
     {
         $this->category = $category;
         $this->product = $product;
         $this->productImage = $productImage;
         $this->tag = $tag;
         $this->productTag = $productTag;
+        $this->color = $color;
+        $this->size = $size;
     }
     public function index()
     {
@@ -50,18 +57,17 @@ class AdminProductController extends Controller
     public function create()
     {
         $htmlOption = $this->getCategory($parent_id = '');
-        return view('admin.product.add', compact('htmlOption'));
+        $colors = $this-> color->get();
+        $sizes = $this->size->get();
+        return view('admin.product.add', compact('htmlOption', 'colors', 'sizes'));
     }
 
     public function store(ProductAddRequest $request) {
-
         try {
             DB::beginTransaction();
             $dataProductCreate = [
                 'name' => $request->name,
                 'price' => $request->price,
-                'color' => $request->color,
-                'size' => $request->sizes,
                 'content' => $request->content,
                 'user_id' => Auth::id(),
                 'category_id' => $request->category_id,
@@ -98,6 +104,18 @@ class AdminProductController extends Controller
                     // ]);
                 }
             }
+
+            //insert colors to colors
+            if(!empty($request->product_colors))
+            {
+                $product->colors()->attach($request->product_colors);
+            }
+
+            //insert sizes to product_sizes
+            if(!empty($request->product_sizes))
+            {
+                $product->sizes()->attach($request->product_sizes);
+            }
     
             //insert tags to product_tags
             if(!empty($request->tags))
@@ -122,16 +140,18 @@ class AdminProductController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
             Log::error("Message: ".$th->getMessage()."---Line".$th->getLine());
-        }
-       
-        
+        }    
     }
 
     public function edit($id)
     {
         $product = $this->product->find($id);
+        $colorsChecked = $product->colors;
+        $sizesChecked = $product->sizes;
+        $colors = $this-> color->get();
+        $sizes = $this->size->get();
         $htmlOption = $this->getCategory($product->category_id);
-        return view('admin.product.edit', compact('htmlOption', 'product'));
+        return view('admin.product.edit', compact('htmlOption', 'product', 'colorsChecked', 'colors', 'sizes', 'sizesChecked'));
     }
 
     public function update(Request $request, $id)
@@ -141,8 +161,6 @@ class AdminProductController extends Controller
             $dataProductUpdate = [
                 'name' => $request->name,
                 'price' => $request->price,
-                'color' => $request->color,
-                'size' => $request->sizes,
                 'content' => $request->content,
                 'user_id' => Auth::id(),
                 'category_id' => $request->category_id,
@@ -158,6 +176,18 @@ class AdminProductController extends Controller
     
             $this->product->find($id)->update($dataProductUpdate);
             $product = $this->product->find($id);
+
+            //update colors to colors
+            if(!empty($request->product_colors))
+            {
+                $product->colors()->sync($request->product_colors);
+            }
+
+            //update sizes to product_sizes
+            if(!empty($request->product_sizes))
+            {
+                $product->sizes()->sync($request->product_sizes);
+            }
     
             //insert data to product_images
             if($request->hasFile('image_path'))

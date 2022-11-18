@@ -1,1 +1,1 @@
-<h1>Ban khong co quyen</h1>
+<h1>Bạn không có quyền</h1>

@@ -57,8 +57,23 @@
                     <td>
                       <img class="productImage_150_100" src="{{  $productItem->feature_image_path }}" alt="">
                     </td>
-                    <td>{{  $productItem->color }}</td>
-                    <td>{{  $productItem->size }}</td>
+
+                    <p hidden>
+                      {{  $textColors = ''; }}
+                      @foreach($productItem -> colors as $productItemColor )
+                      {{  $textColors .= $productItemColor->name .', ' }}
+                      @endforeach
+                    </p>
+                    <td>{{ $textColors }}</td>
+
+                    <p hidden>
+                      {{  $textSizes = ''; }}
+                      @foreach($productItem -> sizes as $productItemSize )
+                      {{  $textSizes .= $productItemSize->name .', ' }}
+                      @endforeach
+                    </p>
+                    <td>{{ $textSizes }}</td>
+
                     <td>{{  optional($productItem->category)->name }}</td>  
                     <td>
                           <a href="{{  route('products.edit', ['id' => $productItem->id]) }}" class="btn btn-default">Edit</a>

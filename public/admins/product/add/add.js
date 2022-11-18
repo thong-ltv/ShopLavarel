@@ -91,3 +91,55 @@ $(function() {
     
       tinymce.init(editor_config);
 })
+
+// function chooseFile(fileInput)
+// {
+//   if(fileInput.files && fileInput.files[0])
+//   {
+//     var reader = new FileReader();
+
+//     reader.onload = function (e) {
+//       $('#imageProduct').attr('src', e.target.result);
+//     }
+
+//     reader.readAsDataURL(fileInput.files[0]);
+//   }
+// }
+
+function chooseFile()
+{
+  var fileSelected = document.getElementById('upLoadImg').files;
+  if(fileSelected.length > 0)
+  {
+    var fileToLoad = fileSelected[0];
+    var fileReader = new FileReader();
+    fileReader.onload = function(fileLoaderEvent)
+      {
+        var srcData = fileLoaderEvent.target.result;
+        var newImage = document.createElement('img');
+        newImage.src = srcData;
+        document.getElementById('displayImg').innerHTML = newImage.outerHTML;
+      }
+    fileReader.readAsDataURL(fileToLoad);
+  }
+}
+
+function chooseLotsFiles()
+{
+  var fileSelected = document.getElementById('upLoadImgDetails').files;
+  if(fileSelected.length > 0)
+  {
+    for (let i = 0; i < fileSelected.length; i++) {
+      var fileToLoad = fileSelected[i];
+      var fileReader = new FileReader();
+      fileReader.onload = function(fileLoaderEvent)
+      {
+        var srcData = fileLoaderEvent.target.result;
+        var newImage = document.createElement('img');
+        newImage.src = srcData;
+        document.getElementById('displayImgDetails').innerHTML += newImage.outerHTML;
+      }
+      fileReader.readAsDataURL(fileToLoad);
+    }
+  }
+}

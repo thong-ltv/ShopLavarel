@@ -9,6 +9,7 @@
 @section('css')
     <link href="{{  asset('vendors/select2/select2.min.css') }}" rel="stylesheet" />
     <link href="{{  asset('admins/product/add/add.css') }}" rel="stylesheet" />
+    <link href="{{  asset('admins/product/edit/edit.css') }}" rel="stylesheet" />
 @endsection
 
 @section('content')
@@ -64,27 +65,32 @@
                     </div>
                     <div class="form-group">
                         <label >Màu sắc sản phẩm </label>
-                        <input type="text" 
-                               class="form-control @error('color') is-invalid @enderror"
-                               name="color" 
-                               placeholder="Nhập tên sản phẩm"
-                               value="{{  old('color') }}"
-                        >
-                        @error('color')
+                        @foreach($colors as $color)
+                            <div class="form-check">
+                            <input class="form-check-input @error('product_colors') is-invalid @enderror" type="checkbox" name="product_colors[]" id="" value="{{ $color->id }}" >
+                            <label class="form-check-label" for="">
+                                {{ $color->name }}
+                            </label>
+                            </div>
+                        @endforeach
+
+                        @error('product_colors')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
+    
                     </div>
                     <div class="form-group">
                         <label >Chọn kích thước</label>
-                        <select class="form-control @error('sizes') is-invalid @enderror" name="sizes">
-                        <option value="">Chon kích thước</option>
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                        <option value="XL">XL</option>
-                        <option value="XXL">XXL</option>
-                        </select>
-                        @error('sizes')
+                        @foreach($sizes as $size)
+                        <div class="form-check">
+                            <input class="form-check-input @error('product_sizes') is-invalid @enderror" type="checkbox" name="product_sizes[]" id="" value="{{ $size->id }}" >
+                            <label class="form-check-label" for="exampleRadios1">
+                                {{ $size->name }}
+                            </label>
+                        </div>
+                         @endforeach  
+
+                         @error('product_sizes')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
@@ -92,17 +98,26 @@
                         <label >Ảnh đại diện sản phẩm </label>
                         <input type="file" 
                                class="form-control-file"
-                               name="feature_image_path" 
+                               name="feature_image_path"
+                               id="upLoadImg"
+                               onchange="chooseFile()" 
                         >
                     </div>
+
+                    <div id="displayImg"></div>
+
                     <div class="form-group">
                         <label >Ảnh chi tiết sản phẩm </label>
                         <input type="file"
                                multiple
                                class="form-control-file"
-                               name="image_path[]" 
+                               name="image_path[]"
+                               id="upLoadImgDetails"
+                               onchange="chooseLotsFiles()"
                         >
                     </div>
+                    
+                    <div id="displayImgDetails"></div>
 
                     <div class="form-group">
                         <label >Chon danh muc</label>
@@ -130,11 +145,11 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                         </div>
-                    </div>
+            </div>
 
-                    <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -148,7 +163,7 @@
 
 @section('js')
     <script src="{{  asset('vendors/select2/select2.min.js') }}"></script>
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/muq3ewk9282l1n7wrp7xu3wmreb9h9xyekl5ep63f1m7sgou/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="{{  asset('admins/product/add/add.js') }}"></script>
 @endsection
 
